@@ -72,7 +72,7 @@ class StudentManagement {
     println(lastList)
   }
 
-  def findingUniquePercentage() = {
+  /*def findingUniquePercentage() = {
     //getScoreCardByGender()._1.zip(getScoreCardByGender()._2).filter(x => x._1.percentage != x._2.percentage)
    /* val genderBasedScoreCard = getScoreCardByGender()
     val lastList = for(maleScore <- genderBasedScoreCard._1; femaleScore <- genderBasedScoreCard._2 if(maleScore.percentage != femaleScore.percentage))yield {
@@ -80,7 +80,7 @@ class StudentManagement {
     }
     println(lastList)*/
    val genderBasedScoreCard = getScoreCardByGender()
-    genderBasedScoreCard._2.toSet - findingSimilarPercentage().toSet
+    genderBasedScoreCard._2.toSet - findingSimilarPercentage().toSet*/
 
   }
 }
