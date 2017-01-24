@@ -63,30 +63,27 @@ class StudentManagement {
     (getScoreCardByGender()._1.filter(_.percentage>=50),getScoreCardByGender()._2.filter(_.percentage>=50))
   }
 
-  def findingSimilarPercentage() = {
+  def findingSimilarPercentage():List[((String,Float),(String,Float))] = {
     //getScoreCardByGender()._1.zip(getScoreCardByGender()._2).filter(x => x._1.percentage == x._2.percentage)
     val genderBasedScoreCard = getScoreCardByGender()
     val lastList = for(maleScore <- genderBasedScoreCard._1; femaleScore <- genderBasedScoreCard._2 if(maleScore.percentage == femaleScore.percentage))yield {
       ((getNameById(maleScore.studentId),maleScore.percentage),(getNameById(femaleScore.studentId),femaleScore.percentage))
     }
-    println(lastList)
+    lastList
   }
 
-  /*def findingUniquePercentage() = {
-    //getScoreCardByGender()._1.zip(getScoreCardByGender()._2).filter(x => x._1.percentage != x._2.percentage)
-   /* val genderBasedScoreCard = getScoreCardByGender()
-    val lastList = for(maleScore <- genderBasedScoreCard._1; femaleScore <- genderBasedScoreCard._2 if(maleScore.percentage != femaleScore.percentage))yield {
-      ((getNameById(femaleScore.studentId),femaleScore.percentage))
-    }
-    println(lastList)*/
+  def findingUniquePercentage() : List[(String,Float)] = {
+
    val genderBasedScoreCard = getScoreCardByGender()
-    genderBasedScoreCard._2.toSet - findingSimilarPercentage().toSet*/
+    genderBasedScoreCard._2.toSet.diff(genderBasedScoreCard._1.toSet) .toList.map(x=> (getNameById(x.studentId),x.percentage))
 
   }
 }
 
   object StudentManagement {
+
      def main(args: Array[String]): Unit = {
+
       val studentManagement = new StudentManagement
 
        println("\n generated map name->ScoreCard\n")
@@ -115,7 +112,6 @@ class StudentManagement {
 
        println(studentManagement.findingUniquePercentage())
 
-       println(studentManagement.getNameById(1))
 
      }
 }
